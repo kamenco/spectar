@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+<div class="jumbotron text-center">
+    <h1>Company</h1> 
+    <p>We specialize in blablabla</p> 
+    <form>
+      <div class="input-group">
+        <input type="email" class="form-control" size="50" placeholder="Email Address" required>
+        <div class="input-group-btn">
+          <button type="button" class="btn btn-danger">Subscribe</button>
+        </div>
+      </div>
+    </form>
+    <img src="{% static 'images/leaflet_one.jpg' %}" alt="Logo">
+    <img src="{% static 'images/poster_one.jpg' %}" alt="Logo">
+  </div>
+  {% endblock %}
