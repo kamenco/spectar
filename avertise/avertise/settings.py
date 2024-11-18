@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-(^9i9ng5e+3w))w)y@hrk3&511ks((j$mk_wm03zhx@$)kc7_0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [ '8000-kamenco-spectar-6in6u62v43m.ws.codeinstitute-ide.net']
+ALLOWED_HOSTS = [ '8000-kamenco-spectar-6in6u62v43m.ws.codeinstitute-ide.net', 'localhost']
 
 
 # Application definition
@@ -117,6 +117,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
+# Directory where `collectstatic` will place all static files
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 STATIC_URL = '/static/'
 

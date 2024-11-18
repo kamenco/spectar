@@ -127,11 +127,11 @@ body {
     border-color: transparent;
     color: #fff !important;
   }
-  footer .glyphicon {
+  /*footer .glyphicon {
     font-size: 20px;
     margin-bottom: 20px;
     color: #f4511e;
-  }
+  }*/
   .slideanim {visibility:hidden;}
   .slide {
     animation-name: slide;
@@ -139,6 +139,27 @@ body {
     animation-duration: 1s;
     -webkit-animation-duration: 1s;
     visibility: visible;
+
+    footer.container-fluid.text-center {
+      padding: 10px 0;      /* Adjust padding to prevent thickness */
+      background-color: #F53E3F;
+      color: white;
+    }
+
+    #social-networks {
+      text-align: center;
+      padding: 20px 0;
+      display: flex;
+      justify-content: space-evenly;
+      list-style-type: none;
+    }
+    
+    #social-networks i {
+      font-size: 300%;
+      padding: 5%;
+      color: yellow;
+    }
+
   }
   @keyframes slide {
     0% {
