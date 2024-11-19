@@ -49,7 +49,8 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#about">ABOUT</a></li>
+        <!--<li><a href="#about">ABOUT</a></li>--> 
+        <li class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}"><a href="{% url 'home' %}">Home</a></li>        
         <li><a href="#portfolio">PRODUCTS</a></li>
         <li><a href="#contact">CONTACT</a></li>
           
@@ -62,7 +63,8 @@
   <h1>SPECTRA</h1> 
   <h3>Advertising agency</h3>
 </div>
-
+{% block content %}
+{% endblock %}
 <footer class="container-fluid text-center">
   <ul id="social-networks">
     <li><a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Visit our Facebook page (opens in a new tab)"><i class="fa fa-facebook-square"></i></a></li>
