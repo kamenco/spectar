@@ -3,7 +3,36 @@
 {% load static %}
 
 {% block content %}
-<p>We specialize in graphic design, creating of posters, leaflets, business cards, digital and offset printing.</p>
+<p class = "text">We specialize in graphic design, creating of posters, leaflets, business cards, book covers, stickers, digital and offset printing. Logo prints on souvenirs, design of wall and desk calendars.</p>
+
+  <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="spectra.jpg">
+        <img src="{% static 'images/spectra.jpg' %}" alt="Logo of spectra">
+      </a>
+      <div class="desc">Logo of advertising agency.</div>
+    </div>
+  </div>
+
+  <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="leaflet_one.jpg">
+        <img src="{% static 'images/leaflet_one.jpg' %}" alt="Leaflet">
+      </a>
+      <div class="desc">Leaflet for real estates.</div>
+    </div>
+  </div>
+
+  <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="poster_pol.jpg">
+        <img class="img-fluid" src="{% static 'images/poster_pol.jpg' %}" alt="Poster">
+      </a>
+      <div class="desc">Poster.</div>
+    </div>
+  </div>
+
   <img id="comp" src="{% static 'images/leaflet_one.jpg' %}">
   <img id="comp" src="{% static 'images/poster_one.jpg' %}">
+
   {% endblock %}
