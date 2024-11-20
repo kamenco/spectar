@@ -52,9 +52,17 @@
         <!--<li><a href="#about">ABOUT</a></li>--> 
         <li class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}"><a href="{% url 'home' %}">Home</a></li>        
         <li><a href="#portfolio">PRODUCTS</a></li>
-        <li><a href="#contact">CONTACT</a></li>
-          
+        <li><a href="#contact">CONTACT</a></li> 
       </ul>
+      <ul class="nav navbar-nav navbar-right">
+        {% if request.user.is_authenticated %}
+            <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            <li><a href="{% url 'update_menu' %}"><span class="glyphicon glyphicon-pencil"></span> Update Menu</a></li>
+            <li><a href="{% url 'tasks' %}"><span class="glyphicon glyphicon-tasks"></span> Tasks</a></li>
+        {% else %}
+            <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        {% endif %}
+    </ul>
     </div>
   </div>
 </nav>

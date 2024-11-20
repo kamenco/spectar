@@ -11,7 +11,11 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 from pathlib import Path
+# from dotenv import load_dotenv
 
+
+# Load .env file
+# load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,10 +24,26 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-(^9i9ng5e+3w))w)y@hrk3&511ks((j$mk_wm03zhx@$)kc7_0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+
+DATABASE_URL = os.getenv('DATABASE_URL')
+
+# Load environment variables from env.py
+env_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'env.py')
+if os.path.exists(env_path):
+    exec(open(env_path).read())
+
+# Retrieve the SECRET_KEY
+SECRET_KEY = os.getenv('SECRET_KEY')
+
+if not SECRET_KEY:
+    raise ImproperlyConfigured("The SECRET_KEY must not be empty.")
+
+# Other settings...
+DEBUG = os.getenv('DEBUG') == 'True'
+
+
 
 ALLOWED_HOSTS = [ '8000-kamenco-spectar-6in6u62v43m.ws.codeinstitute-ide.net', 'localhost']
 
