@@ -45,19 +45,26 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand"><img id="comp" src="{% static 'images/comp_white.png' %}"></a>
+      <ul class="nav navbar-nav navbar-right">
+        {% if user.is_authenticated %}
+          <li><a href="{% url 'account_logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        {% else %}
+          <li><a href="{% url 'account_login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          <li><a href="{% url 'account_signup' %}"><span class="glyphicon glyphicon-user"></span> Register</a></li>
+        {% endif %}
+      </ul>      
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
         <!--<li><a href="#about">ABOUT</a></li>--> 
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="{% url 'account_login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          
+  </ul>
         <li class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}"><a href="{% url 'home' %}">Home</a></li>        
         <li><a href="#portfolio">PRODUCTS</a></li>
-        <li><a href="#contact">CONTACT</a></li> 
+        <li class="{% if request.resolver_match.url_name == 'order' %}active{% endif %}"><a href="{% url 'order' %}">CONTACT</a></li> 
       </ul>
-      <ul class="nav navbar-nav navbar-right">
-            <li><a href="{% url 'account_login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-      
-    </ul>
     </div>
   </div>
 </nav>
