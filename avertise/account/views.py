@@ -5,7 +5,6 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
-
 # Signup View
 def signup(request):
     if request.method == 'POST':
@@ -17,3 +16,11 @@ def signup(request):
     else:
         form = UserCreationForm()
     return render(request, 'account/account-signup.html', {'form': form})
+
+
+@login_required
+def profile(request):
+    return render(request, 'account/profile.html')
+
+
+

@@ -1,0 +1,11 @@
+<h1>Welcome, {{ user.username }}</h1>
+<p>Email: {{ user.email }}</p>
+<p>You're logged in!</p>
+
+{% if user.is_superuser %}
+    <p>You are a superuser. Manage your site in the <a href="/admin/">Admin Panel</a>.</p>
+{% else %}
+    <p>This is your user profile page.</p>
+{% endif %}
+
+<a href="{% url 'account_logout' %}">Logout</a>
