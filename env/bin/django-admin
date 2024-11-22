@@ -1,4 +1,4 @@
-#!/workspace/spectar/env/bin/python3
+#!/workspace/spectar/env/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
