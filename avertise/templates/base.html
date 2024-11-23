@@ -65,9 +65,9 @@
             <li>
             {% endif %}
           <!-- Navigation Links -->
-          <li class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}"><a href="{% url 'home' %}">Home</a></li>
+          <li class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}"><a href="{% url 'home' %}">HOME</a></li>
           <li><a href="#portfolio">PRODUCTS</a></li>
-          <li class="{% if request.resolver_match.url_name == 'order' %}active{% endif %}"><a href="{% url 'order' %}">CONTACT</a></li>
+          <li class="{% if request.resolver_match.url_name == 'order' %}active{% endif %}"><a href="{% url 'order' %}">ORDER</a></li>
         </ul>
       </div>
     </div>

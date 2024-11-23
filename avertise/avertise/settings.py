@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
+import env
 from pathlib import Path
 # from dotenv import load_dotenv
 
@@ -47,6 +48,8 @@ DEBUG = os.getenv('DEBUG') == 'True'
 
 ALLOWED_HOSTS = [ '8000-kamenco-spectar-6in6u62v43m.ws.codeinstitute-ide.net', 'localhost']
 
+STRIPE_PUBLIC_KEY=os.getenv('STRIPE_PUBLIC_KEY')
+STRIPE_SECRET_KEY=os.getenv('STRIPE_SECRET_KEY')
 
 # Application definition
 
@@ -60,6 +63,7 @@ INSTALLED_APPS = [
     'home',
     'order',
     'account',
+    'checkout',
 ]
 
 MIDDLEWARE = [
