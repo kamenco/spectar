@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% load static %}
 
 {% block content %}
@@ -13,28 +12,33 @@
             <p><span class="glyphicon glyphicon-envelope"></span> spectra@gbg.bg</p>
         </div>
         <div class="col-sm-7 slideanim">
-            <form method="post">
-                {% csrf_token %}
-                <div class="row">
-                    <div class="col-sm-6 form-group">
-                        <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
+            {% if user.is_authenticated %}
+                <!-- Main form for placing an order -->
+                <form action="{% url 'submit_order' %}" method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <select class="form-control" id="order_type" name="order_type" required>
+                                <option value="" disabled selected>Select Order Type</option>
+                                <option value="logo">Logo</option>
+                                <option value="leaflet">Leaflet</option>
+                                <option value="poster">Poster</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="col-sm-6 form-group">
-                        <select class="form-control" id="order_type" name="order_type" required>
-                            <option value="" disabled selected>Select Order Type</option>
-                            <option value="logo">Logo</option>
-                            <option value="leaflet">Leaflet</option>
-                            <option value="poster">Poster</option>
-                        </select>
+                    <textarea class="form-control" id="comments" name="comments" placeholder="Description of your order" rows="5" required></textarea><br>
+                    <div class="row">
+                        <div class="col-sm-12 form-group">
+                            <button class="btn btn-default pull-right" type="submit">Place Order</button>
+                        </div>
                     </div>
-                </div>
-                <textarea class="form-control" id="comments" name="comments" placeholder="Description of your order" rows="5" required></textarea><br>
-                <div class="row">
-                    <div class="col-sm-12 form-group">
-                        <button class="btn btn-default pull-right" type="submit">Place Order</button>
-                    </div>
-                </div>
-            </form>
+                </form>
+            {% else %}
+                <p class="text-center">Please <a href="{% url 'login' %}">login</a> to place an order.</p>
+            {% endif %}
         </div>
     </div>
 </div>

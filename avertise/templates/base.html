@@ -54,20 +54,20 @@
         <ul class="nav navbar-nav navbar-right">
           <!-- Authentication Links -->
           {% if user.is_authenticated %}
-              <form method="post" action="{% url 'account_logout' %}" style="display:inline;">
+              <form method="post" action="{% url 'logout' %}" style="display:inline;">
                 {% csrf_token %}
                 <button type="submit" class="btn btn-link navbar-btn"><span class="glyphicon glyphicon-log-out"></span> Logout</button>
               </form>
             </li>
           {% else %}
-            <li><a href="{% url 'account_login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-            <li><a href="{% url 'account_signup' %}"><span class="glyphicon glyphicon-user"></span> Register</a></li>
+            <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <li><a href="{% url 'signup' %}"><span class="glyphicon glyphicon-user"></span> Register</a></li>
             <li>
             {% endif %}
           <!-- Navigation Links -->
           <li class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}"><a href="{% url 'home' %}">HOME</a></li>
           <li><a href="#portfolio">PRODUCTS</a></li>
-          <li class="{% if request.resolver_match.url_name == 'order' %}active{% endif %}"><a href="{% url 'order' %}">ORDER</a></li>
+          <li class="{% if request.resolver_match.url_name == 'order' %}active{% endif %}"><a href="{% url 'order_home' %}">ORDER</a></li>
         </ul>
       </div>
     </div>

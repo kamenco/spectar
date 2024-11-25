@@ -1,15 +1,37 @@
-{% extends "base.html" %}
-{% load static %}
-{% load bag_tools %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkout</title>
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+    <h1>Make a Payment</h1>
+    <form id="payment-form">
+        <div id="card-element"></div>
+        <button type="submit" id="submit">Pay</button>
+        <div id="error-message"></div>
+    </form>
 
-{% block extra_css %}
-    <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
-{% endblock %}
+    <script>
+        const stripe = Stripe('{{ STRIPE_PUBLIC_KEY }}');
+        const elements = stripe.elements();
+        const card = elements.create('card');
+        card.mount('#card-element');
 
-
-{% block postloadjs %}
-    {{ block.super }}
-    {{ stripe_public_key|json_script:"id_stripe_public_key" }}
-    {{ client_secret|json_script:"id_client_secret" }}
-    <script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
-{% endblock %}
+        const form = document.getElementById('payment-form');
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const {error, paymentIntent} = await stripe.confirmCardPayment('{{ client_secret }}', {
+                payment_method: {
+                    card: card,
+                }
+            });
+            if (error) {
+                document.getElementById('error-message').textContent = error.message;
+            } else {
+                window.location.href = '/success/';  // Redirect to success page
+            }
+        });
+    </script>
+</body>
+</html>
