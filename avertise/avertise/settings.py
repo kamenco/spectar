@@ -77,7 +77,7 @@ MIDDLEWARE = [
 
 ]
 
-LOGIN_URL = '/accounts/login/'
+LOGIN_URL = '/account/login/'
 
 
 CSRF_TRUSTED_ORIGINS = [
