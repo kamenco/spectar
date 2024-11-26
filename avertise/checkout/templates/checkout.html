@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkout</title>
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        /* Add some basic styles for layout */
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin: 20px;
+        }
+        .details, .order-summary {
+            width: 45%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .order-summary h2, .details h2 {
+            margin-top: 0;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Checkout</h1>
+    <div class="container">
+        <!-- Customer Details Section -->
+        <div class="details">
+            <h2>Details</h2>
+            <form id="payment-form">
+                <!-- Full Name -->
+                <div class="form-group">
+                    <label for="full-name">Full Name</label>
+                    <input type="text" id="full-name" name="full_name" required>
+                </div>
+                <!-- Email Address -->
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <!-- Phone Number -->
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <!-- Stripe Card Element -->
+                <div class="form-group">
+                    <label for="card-element">Payment Information</label>
+                    <div id="card-element"></div>
+                </div>
+                <!-- Submit Button -->
+                <button type="submit" id="submit">Pay</button>
+                <div id="error-message" style="color: red; margin-top: 10px;"></div>
+            </form>
+        </div>
+
+        <!-- Order Summary Section -->
+        <div class="order-summary">
+            <h2>Order Summary</h2>
+            <p><strong>Description:</strong> {{ order_description }}</p>
+            <p><strong>Price:</strong> ${{ order_price }}</p>
+        </div>
+    </div>
+
+    <script>
+        const stripe = Stripe('{{ STRIPE_PUBLIC_KEY }}');
+        const elements = stripe.elements();
+        const card = elements.create('card');
+        card.mount('#card-element');
+
+        const form = document.getElementById('payment-form');
+        form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const fullName = document.getElementById('full-name').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+
+    if (!fullName || !email || !phone) {
+        document.getElementById('error-message').textContent = 'Please fill out all required fields.';
+        return;
+    }
+
+    const { error, paymentIntent } = await stripe.confirmCardPayment('{{ client_secret }}', {
+        payment_method: {
+            card: card,
+            billing_details: {
+                name: fullName,
+                email: email,
+                phone: phone,
+            },
+        },
+    });
+
+    if (error) {
+        document.getElementById('error-message').textContent = error.message;
+    } else {
+        // Redirect to the success page after payment
+        window.location.href = '/checkout/success/';
+    }
+});
+    </script>
+</body>
+</html>

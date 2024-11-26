@@ -13,26 +13,27 @@
         </div>
         <div class="col-sm-7 slideanim">
             {% if user.is_authenticated %}
-                <!-- Main form for placing an order -->
-                <form action="{% url 'submit_order' %}" method="post">
-                    {% csrf_token %}
+                <!-- Main form for selecting an order type and proceeding to checkout -->
+                <form action="{% url 'checkout' %}" method="get">
                     <div class="row">
                         <div class="col-sm-6 form-group">
+                            <label for="name">Name</label>
                             <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
                         </div>
                         <div class="col-sm-6 form-group">
+                            <label for="order_type">Order Type</label>
                             <select class="form-control" id="order_type" name="order_type" required>
                                 <option value="" disabled selected>Select Order Type</option>
-                                <option value="logo">Logo</option>
-                                <option value="leaflet">Leaflet</option>
-                                <option value="poster">Poster</option>
+                                <option value="logo">Logo - $500</option>
+                                <option value="leaflet">Leaflet - $200</option>
+                                <option value="poster">Poster - $300</option>
                             </select>
                         </div>
                     </div>
                     <textarea class="form-control" id="comments" name="comments" placeholder="Description of your order" rows="5" required></textarea><br>
                     <div class="row">
                         <div class="col-sm-12 form-group">
-                            <button class="btn btn-default pull-right" type="submit">Place Order</button>
+                            <button class="btn btn-primary pull-right" type="submit">Proceed to Checkout</button>
                         </div>
                     </div>
                 </form>
