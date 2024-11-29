@@ -2,6 +2,10 @@ import stripe
 from django.shortcuts import render, redirect
 from django.conf import settings
 from django.http import JsonResponse
+from .models import Order
+from django.contrib.auth.decorators import login_required
+
+
 
 # Initialize Stripe
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -40,8 +44,45 @@ def checkout(request):
         'client_secret': payment_intent['client_secret'],  # Required for Stripe integration
     }
 
+    
+    # Your existing checkout logic...
+    request.session['order_type'] = order_type
+    request.session['description'] = custom_description if custom_description else order_details['description']
+    request.session['price'] = order_details['price'] / 100  # Store in dollars
+    
+    # Render checkout.html...
+
     return render(request, 'checkout.html', context)
 
 
 def success(request):
+    # Retrieve order details from session or Stripe webhook data
+    order_type = request.session.get('order_type')
+    description = request.session.get('description')
+    price = request.session.get('price')
+
+    # Save the order to the database
+    if request.user.is_authenticated and order_type and description and price:
+        Order.objects.create(
+            user=request.user,
+            order_type=order_type,
+            description=description,
+            price=price,
+        )
+
+    # Clear session data after saving
+    request.session.pop('order_type', None)
+    request.session.pop('description', None)
+    request.session.pop('price', None)
+
     return render(request, 'success.html', {'message': 'Your payment was successful!'})
+
+
+# Profile view
+@login_required
+def profile(request):
+    # Get all orders for the logged-in user
+    user_orders = Order.objects.filter(user=request.user).order_by('-created_at')
+
+    # Pass the orders to the profile.html template
+    return render(request, 'profile.html', {'orders': user_orders})

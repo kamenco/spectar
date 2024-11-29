@@ -6,8 +6,8 @@ from django.contrib.auth.models import User
 
 class GraphicOrder(models.Model):
     TYPE_CHOICES = [
-        ('icon', 'Icon'),
         ('logo', 'Logo'),
+        ('leaflet', 'Leaflet'),
         ('poster', 'Poster'),
     ]
     user = models.ForeignKey(User, on_delete=models.CASCADE)
