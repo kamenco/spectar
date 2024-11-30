@@ -33,3 +33,36 @@ def submit_order(request):
 # Redirect to the checkout page (assuming a checkout view exists)
 def redirect_to_checkout(request):
     return redirect('checkout')  # Replace 'checkout' with the correct URL name if different
+
+def success(request):
+    # Retrieve order details from session
+    order_type = request.session.get('order_type')
+    description = request.session.get('description')
+    price = request.session.get('price')
+
+    # Save order to database
+    if request.user.is_authenticated and order_type and description and price:
+        Order.objects.create(
+            user=request.user,
+            order_type=order_type,
+            description=description,
+            price=price,
+        )
+
+    # Prepare a confirmation message
+    message = 'Your payment was successful!'
+
+    # Pass data to the template
+    context = {
+        'message': message,
+        'order_type': order_type,
+        'description': description,
+        'price': price,
+    }
+
+    # Clear session data
+    request.session.pop('order_type', None)
+    request.session.pop('description', None)
+    request.session.pop('price', None)
+
+    return render(request, 'success.html', context)

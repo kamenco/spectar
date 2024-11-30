@@ -61,6 +61,11 @@ def success(request):
     description = request.session.get('description')
     price = request.session.get('price')
 
+    
+    # print("Order Type:", request.session.get('order_type'))
+    # print("Description:", request.session.get('description'))
+    # print("Price:", request.session.get('price'))
+
     # Save the order to the database
     if request.user.is_authenticated and order_type and description and price:
         Order.objects.create(
@@ -75,7 +80,14 @@ def success(request):
     request.session.pop('description', None)
     request.session.pop('price', None)
 
-    return render(request, 'success.html', {'message': 'Your payment was successful!'})
+
+     # Pass data to the success.html template
+    return render(request, 'success.html', {
+        'message': 'Your payment was successful!',
+        'order_type': order_type,
+        'description': description,
+        'price': price,
+    })
 
 
 # Profile view
