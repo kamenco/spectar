@@ -21,4 +21,6 @@ def signup(request):
 @login_required
 def profile(request):
     orders = request.user.orders.all()  # Fetch all orders for the logged-in user
-    return render(request, 'profile.html', {'orders': orders})
+    return render(request, 'account/profile.html')
+
+

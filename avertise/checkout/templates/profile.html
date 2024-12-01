@@ -1,9 +1,13 @@
 <h1>Welcome, {{ user.username }}</h1>
 <p>Email: {{ user.email }}</p>
 <p>You're logged in!</p>
+<p>This is the profile template.</p>
+
 
 {% if user.is_superuser %}
     <p>You are a superuser. Manage your site in the <a href="/admin/">Admin Panel</a>.</p>
+    <p>View and manage all orders: <a href="{% url 'view_all_orders' %}">All Orders</a></p>
+
 {% else %}
     <p>This is your user profile page.</p>
 {% endif %}
@@ -38,4 +42,3 @@
     {% csrf_token %}
     <button type="submit">Logout</button>
 </form>
-
