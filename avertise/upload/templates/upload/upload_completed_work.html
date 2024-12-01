@@ -1,6 +1,15 @@
-<h1>Upload Completed Work</h1>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Upload</button>
-</form>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Completed Work</title>
+</head>
+<body>
+    <h1>Upload Completed Work for {{ order.order_type }}</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Upload</button>
+    </form>
+    <a href="{% url 'upload:view_all_orders' %}">Back to Orders</a>
+</body>
+</html>

@@ -6,7 +6,7 @@
 
 {% if user.is_superuser %}
     <p>You are a superuser. Manage your site in the <a href="/admin/">Admin Panel</a>.</p>
-    <p>View and manage all orders: <a href="{% url 'view_all_orders' %}">All Orders</a></p>
+    <p>View and manage all orders: <a href="{% url 'upload:view_all_orders' %}">All Orders</a></p>
 
 {% else %}
     <p>This is your user profile page.</p>
