@@ -66,10 +66,10 @@ INSTALLED_APPS = [
 
     # add  your apps
     'avertise.home',
-    'order',
-    'account',
-    'checkout',
-    'upload',
+    'avertise.order',
+    'avertise.account',
+    'avertise.checkout',
+    'avertise.upload',
 ]
 
 MIDDLEWARE = [
