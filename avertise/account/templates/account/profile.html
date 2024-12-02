@@ -3,11 +3,9 @@
 <p>You're logged in!</p>
 <p>This is the profile template.</p>
 
-
 {% if user.is_superuser %}
     <p>You are a superuser. Manage your site in the <a href="/admin/">Admin Panel</a>.</p>
     <p>View and manage all orders: <a href="{% url 'upload:view_all_orders' %}">All Orders</a></p>
-
 {% else %}
     <p>This is your user profile page.</p>
 {% endif %}
@@ -20,6 +18,7 @@
             <th>Description</th>
             <th>Price</th>
             <th>Date</th>
+            <th>Completed Work</th>
         </tr>
     </thead>
     <tbody>
@@ -29,10 +28,17 @@
                 <td>{{ order.description }}</td>
                 <td>${{ order.price }}</td>
                 <td>{{ order.created_at }}</td>
+                <td>
+                    {% if order.completed_work and order.completed_work.file %}
+                        <a href="{{ order.completed_work.file.url }}" download>Download</a>
+                    {% else %}
+                        Not available
+                    {% endif %}
+                </td>
             </tr>
         {% empty %}
             <tr>
-                <td colspan="4">You have no orders yet.</td>
+                <td colspan="5">You have no orders yet.</td>
             </tr>
         {% endfor %}
     </tbody>

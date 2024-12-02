@@ -14,10 +14,12 @@ def upload_completed_work(request, order_id):
         form = CompletedWorkForm(request.POST, request.FILES, instance=completed_work)
         if form.is_valid():
             form.save()
-            return redirect('order_home')  # Replace with your actual URL name
+            # Redirect to the user's profile page after successful upload
+            return redirect('account:profile')  # Ensure this namespace matches your URLs
     else:
         form = CompletedWorkForm(instance=completed_work)
     return render(request, 'upload/upload_completed_work.html', {'form': form, 'order': order})
+
 
 @user_passes_test(lambda u: u.is_superuser)
 def view_all_orders(request):

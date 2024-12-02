@@ -5,7 +5,7 @@
 </head>
 <body>
     <h1>Upload Completed Work for {{ order.order_type }}</h1>
-    <form method="post" enctype="multipart/form-data">
+    <form method="post" action="{% url 'upload:upload_completed_work' order.id %}" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Upload</button>
