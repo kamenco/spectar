@@ -1,3 +1,4 @@
-web: gunicorn avertise.wsgi:application
+web: gunicorn avertise.avertise.wsgi:application
+
 
 
