@@ -2,7 +2,7 @@ import stripe
 from django.shortcuts import render, redirect
 from django.conf import settings
 from django.http import JsonResponse
-from .models import Order
+from avertise.checkout.models import Order
 from django.contrib.auth.decorators import login_required
 
 
