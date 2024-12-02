@@ -180,10 +180,13 @@ The Agile tool used for this project is Git Project.
  Javascript validation
 
 ---
-Form submission validation. Form submission using Javascript.
+Stripe submission validation.
 
-![Email successfully submitted!](README_ASSETS/email_valid.png "Email successfully submitted!")
-Validation from emaijs.com
+![Stripe successful!](avertise/README_ASSETS/stripe_successful.png "Stripe payment successfully submitted!")
+Validation from stripe.com
+
+![Stripe webhook!](avertise/README_ASSETS/webhook_enabled.png "Stripe webhook enabled!")
+Validation from stripe.com for adding the endpoint with added events.
 
  Python validation
 
@@ -205,22 +208,27 @@ Lighthouse runs an audit of your website and feeds back a set of scores for acce
 
 After implementing login required when submitting the order, the login and logout pages could not be found. Got an error TemplateDoesNotExist at accounts/login. The bug was resolved after a new folder registration in project folder/templates/registration was created.
 
-![Bug, menu can be updated from url!](README_ASSETS/menu_update_bug.png "Menu accesssed by url!")
+![Bug, menu can be updated from url!](avertise/README_ASSETS/order_bug.png "Menu accesssed by url!")
 
-This bug was solved with adding 
+No order_type is passed or it is invalid, the user sees an error or be redirected to the order page. I had to ensure that the order_type is being passed correctly from the frontend (order.html) to the backend (checkout view).
 
-        from django.contrib.auth.decorators import login_required
+![Bug, menu can be updated from url!](avertise/README_ASSETS/success_bug.png "Menu accesssed by url!")
 
-        @login_required
-        def delete_menu_item(request, menu_item_id):
-    
-        menu_item = get_object_or_404(MenuItem, id=menu_item_id)
-        if request.method == 'POST':
-        menu_item.delete()
-        messages.success(request, "Menu item successfully deleted!")
-        return redirect('update_menu')
+The success.html does not show the order_type,  descrption and price. Debugging steps created:
 
-This makes the menu accessible to only logged in users. @login_required enforces authentication.
+
+         print("Order Type:", request.session.get('order_type'))
+         print("Description:", request.session.get('description'))
+         print("Price:", request.session.get('price'))
+
+And data was passed to success.html template.
+
+        return render(request, 'success.html', {
+        'message': 'Your payment was successful!',
+        'order_type': order_type,
+        'description': description,
+        'price': price,
+        })
 
 ![Bug, tasks can be updated from url!](README_ASSETS/task_update_bug.png "Tasks accesssed by url!")
 
