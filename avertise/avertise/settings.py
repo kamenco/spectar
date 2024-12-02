@@ -47,7 +47,7 @@ DEBUG = os.getenv('DEBUG') == 'True'
 
 
 
-ALLOWED_HOSTS = ['advertise.herokuapp.com', '8000-kamenco-spectar-6in6u62v43m.ws.codeinstitute-ide.net', 'localhost']
+ALLOWED_HOSTS = ['https://advertise-5cb494aee8a9.herokuapp.com/', '8000-kamenco-spectar-6in6u62v43m.ws.codeinstitute-ide.net', 'localhost']
 
 STRIPE_PUBLIC_KEY=os.getenv('STRIPE_PUBLIC_KEY')
 STRIPE_SECRET_KEY=os.getenv('STRIPE_SECRET_KEY')
