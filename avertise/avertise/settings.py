@@ -117,7 +117,7 @@ MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 SITE_ID=1
 
-WSGI_APPLICATION = 'avertise.wsgi.application'
+WSGI_APPLICATION = 'avertise.avertise.wsgi.application'
 
 
 # Database
